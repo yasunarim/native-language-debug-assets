@@ -6,12 +6,16 @@ AIが生成したコードの理解とデバッグにも役立ちます。
 Pythonコードを日本語に変換して表示し、  
 コードの意味を自然言語で読みながらデバッグできるようにします。
 
-![デバッグ実行](https://yasunarim.github.io/native-language-debug-assets/movie003.gif)
-
 ---
 
 ⚠ この拡張は現在MVP（初期バージョン）です。  
 不具合や改善提案があれば Issue で教えていただけると嬉しいです。
+
+[公開用のGithubのIssue](https://github.com/yasunarim/native-language-debug-assets/issues)
+
+---
+
+![デバッグ実行](https://yasunarim.github.io/native-language-debug-assets/movie003.gif)
 
 ---
 
@@ -106,13 +110,74 @@ VSCodeのデバッグ実行と連携し、
 
 * GitHub Copilot
 * OpenAI
-* Claude
+* Anthropic Claude
 
 ステータスバーのアイコンから変更できます。
 
 ---
 
 # 使い方
+
+## 0. モデルの設定
+
+日本語化にはLLMを利用します。利用するサービスは以下です。
+
+* GitHub Copilot
+* OpenAI
+* Anthropic Claude
+
+コマンドパレットの
+
+`Native Language Debug:使用モデルを選択`
+
+または、または右下のステータスバーの虫アイコンから
+
+`モデル／プロバイダを選択`
+
+を選択します。
+
+### GitHub Copilot
+
+Github Copilot　を選択するとモデルの一覧が表示されるので、
+
+利用するモデルを選択します。
+
+* Github Copilot 拡張機能のインストールが必要です。
+* Github Copilot のプランによって使えるモデルや回数などが異なります。
+
+### OpenAI
+
+OpenAIを選択して利用するには、OpenAIのAPIキーの設定が必要です。
+
+APIキーの選択は、コマンドパレットの
+
+`Native Language Debug: API キーを設定`
+
+または、または右下のステータスバーの虫アイコンから
+
+`APIキーを設定`
+
+を選びます。設定するAPIキーは、事前にOpenAIに契約してAPIキーを取得してください。
+OpenAIを選択すると利用可能なモデルのリストが表示されるので、
+利用するモデルを選択します。
+
+### Anthropic Claude
+
+Anthropic Claudeを選択して利用するには、Anthropic ClaudeのAPIキーの設定が必要です。
+
+APIキーの選択は、コマンドパレットの
+
+`Native Language Debug: API キーを設定`
+
+または、または右下のステータスバーの虫アイコンから
+
+`APIキーを設定`
+
+を選びます。設定するAPIキーは、事前にAntropicに契約してAPIキーを取得してください。
+Claudeを選択すると利用可能なモデルのリストが表示されるので、
+利用するモデルを選択します。
+
+---
 
 ## 1. Pythonファイルを開く
 
@@ -122,11 +187,29 @@ VSCodeのデバッグ実行と連携し、
 
 ## 2. 日本語ペインを開く
 
-コマンドパレットから
+Pythonファイルを開くと、日本語コードが表示されます。
 
-Native Language Debug: 日本語ペインを開く
+機能を一時的にオフにするには、コマンドパレットの
 
-またはステータスバーの虫アイコンから開きます。
+`Native Language Debug: メニュー`
+
+または、または右下のステータスバーの虫アイコンから
+
+`日本語でデバッグ をオフにする`
+
+を選びます。
+
+日本語ペインを閉じるには、日本語でデバッグタブのバツボタンをクリックします。
+
+サイド表示するには、コマンドパレットの
+
+`Native Language Debug: 日本語ペインを開く`
+
+または、または右下のステータスバーの虫アイコンから
+
+`日本語ペインを開く`
+
+を選びます。
 
 ---
 
@@ -157,11 +240,17 @@ AIによるコード説明が表示されます。
 
 ## Python 実行環境
 
+実行にはPythonが必要です。
+
 Pythonの実行パスは次の優先順で検出されます。
 
-1. 設定 `nativeLanguageDebug.pythonPath`
-2. VSCode Python拡張のインタープリタ
+1. この拡張機能の設定 `Native Language Debug: Python Path`
+2. VSCode Python拡張機能のインタープリタ
 3. PATH の python3 / python
+
+Python拡張機能をインストールしておらず、PATHにもPythonのパス指定がない場合は、
+
+設定から`Native Language Debug: Python Path`を設定してください。
 
 ---
 
@@ -171,7 +260,13 @@ OpenAI / Claude を使用する場合は
 APIキーを設定してください。
 
 コマンド
-Native Language Debug: API キーを設定
+`Native Language Debug: API キーを設定`
+
+または、または右下のステータスバーの虫アイコンから
+
+`APIキーを設定`
+
+を選びます。
 
 APIキーは **SecretStorage に安全に保存**されます。
 
